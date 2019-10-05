@@ -5,10 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RGB Color Game</title>
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="../static/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>The Great <spin id="colorDisplay">RGB</spin> Color Game</h1>
+
+    <div id="stripe">
+        <button id="reset">New Colors</button>
+        <span id="message"></span>
+        <button id="easy">Easy</button>
+        <button class="selected" id="hard">Hard</button>
+    </div>
+
     <div id="container">
         <div class="square"></div>
         <div class="square"></div>
@@ -18,6 +27,6 @@
         <div class="square"></div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="../static/app.js"></script>
 </body>
 </html>

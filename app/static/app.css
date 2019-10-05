@@ -1,9 +1,15 @@
 body {
     background-color: #232323;
+    margin: 0;
+    font-family: 'Varela Round', sans-serif;
 }
 
 h1 {
+    text-align: center;
+    margin: 0;
+    background: steelblue;
     color: white;
+    font-weight: normal;
 }
 
 .square {
@@ -14,7 +20,21 @@ h1 {
     margin: 1.66%;
 }
 
+.selected {
+    background: blue;
+}
+
 #container {
     max-width: 600px;
     margin: 0 auto;
+}
+
+#message {
+    
+}
+
+#stripe {
+    background: white;
+    height: 30px;
+    text-align: center;
 }
