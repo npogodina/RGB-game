@@ -8,13 +8,24 @@ let resetBtn = document.querySelector("#reset");
 let squares = document.querySelectorAll(".square");
 let colorDisplay = document.getElementById("colorDisplay");
 let messageDisplay = document.querySelector("#message");
-let h1 = document.querySelector("h1");
+// let h1 = document.querySelector("h1");
 let modeButtons = document.querySelectorAll(".mode");
+
+resetBtn.addEventListener("click", reset);
 
 init();
 
 function init() {
-    //mode buttons event listeners
+    setUpModeButtons();
+    playGame();
+    reset();
+
+}
+
+// FIRST LEVEL FUNCTIONS
+
+// function to add event listeners to difficulty mode buttons
+function setUpModeButtons() {
     for (i = 0; i < modeButtons.length; i++) {
         modeButtons[i].addEventListener("click", function(){
             modeButtons[0].classList.remove("selected");
@@ -23,26 +34,31 @@ function init() {
             this.textContent === "Easy" ? numSquares = 3 : numSquares = 6;
             reset();
         })
-    }
-
-    playGame();
-
-    reset();
-
+    };
 }
 
 
+// main function that plays the game
+function playGame() {
+    for (i = 0; i < squares.length; i++) {
+        squares[i].addEventListener("click", function() {
+            console.log('Square got clicked!');
+            if (this.style.backgroundColor === pickedColor) {
+                messageDisplay.textContent = "Correct";
+                changeColors(pickedColor);
+                // h1.style.backgroundColor = pickedColor;
+                resetBtn.textContent = "Play again!";
+            } else {
+                this.style.backgroundColor = "transparent";
+                messageDisplay.textContent = "Try again!";
+            }
+        });
+    };
+}
 
-resetBtn.addEventListener("click", reset);
-
-// let colors = generateRandomColors(numSquares);
-
-
-
-
-//function to reset the game
+// function to reset the game
 function reset() {
-    //h1.style.backgroundColor = "steelblue";
+    // h1.style.backgroundColor = "transparent";
     colors = generateRandomColors(numSquares);
     pickedColor = pickColor();
     colorDisplay.textContent = pickedColor;
@@ -56,10 +72,10 @@ function reset() {
         } else {
             squares[i].style.display = "none";
         }
-    }
-
-
+    };
 }
+
+// SECOND LEVEL FUNCTIONS
 
 // function to generate and return one random color
 function random_bg_color() {
@@ -81,9 +97,6 @@ function generateRandomColors(numberOfColors) {
 }
 
 //function to select a random color from the array to be a picked color
-
-colorDisplay.textContent = pickedColor;
-
 function pickColor() {
     let random = Math.floor(Math.random() * colors.length);
     return colors[random];
@@ -95,75 +108,3 @@ function changeColors(color) {
         squares[i].style.backgroundColor = color;
     };
 }
-
-// main function that starts the game
-function playGame() {
-
-    //let colors = generateRandomColors(6);
-    //let pickedColor = pickColor();
-
-    for (i = 0; i < squares.length; i++) {
-        //add click listeners to squares
-        //squares[i].style.backgroundColor = colors[i];
-        squares[i].addEventListener("click", function() {
-            console.log('Square got clicked!');
-            if (this.style.backgroundColor === pickedColor) {
-                messageDisplay.textContent = "Correct";
-                changeColors(pickedColor);
-                h1.style.backgroundColor = pickedColor;
-                resetBtn.textContent = "Play again!";
-            } else {
-                this.style.backgroundColor = "#232323";
-                messageDisplay.textContent = "Try again!";
-            }
-        });
-    }
-}
-
-
-playGame();
-
-
-// Old code before re-factoring
-
-// easyBtn.addEventListener("click", function(){
-//     easyBtn.classList.add("selected");
-//     hardBtn.classList.remove("selected");
-//     numSquares = 3;
-//     colors = generateRandomColors(numSquares);
-//     pickedColor = pickColor();
-//     colorDisplay.textContent = pickedColor;
-//     messageDisplay.textContent = "";
-//     for (let i = 0; i < squares.length; i++) {
-//         if (colors[i]) {
-//             squares[i].style.backgroundColor = colors[i];
-//         } else {
-//             squares[i].style.display = "none";
-//         }
-//     }
-// })
-
-// hardBtn.addEventListener("click", function(){
-//     hardBtn.classList.add("selected");
-//     easyBtn.classList.remove("selected");
-//     numSquares = 6;
-//     colors = generateRandomColors(numSquares);
-//     pickedColor = pickColor();
-//     colorDisplay.textContent = pickedColor;
-//     messageDisplay.textContent = "";
-//     for (let i = 0; i < squares.length; i++) {
-//         squares[i].style.backgroundColor = colors[i];
-//         squares[i].style.display = "block";
-//         }
-// })
-
-// function to reset colors
-// function resetColors() {
-//     h1.style.backgroundColor = "steelblue";
-//     colors = generateRandomColors(numSquares);
-//     pickedColor = pickColor();
-//     colorDisplay.textContent = pickedColor;
-//     reset.textContent = "New Colors";
-//     messageDisplay.textContent = "";
-//     playGame();
-// }
