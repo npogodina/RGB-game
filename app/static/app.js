@@ -63,7 +63,7 @@ function reset() {
     pickedColor = pickColor();
     colorDisplay.textContent = pickedColor;
     resetBtn.textContent = "New Colors";
-    messageDisplay.textContent = "";
+    messageDisplay.textContent = "Guess the color!";
 
     for (let i = 0; i < squares.length; i++) {
         if (colors[i]) {
